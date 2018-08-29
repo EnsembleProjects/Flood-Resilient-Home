@@ -2,6 +2,7 @@
 // reads 15 input sensors (reed switches or buttons or anything else)
 // their port numbers and type (open/closed) are configurable below
 // (don't use port 13 as input, because it's the onboard LED)
+// (port 14 is GND, and port1 is Tx)
 // sends comma-separated list of 0 or 1 to the serial port
 // if any sensor input is On, the onboard LED is lit
 
@@ -9,19 +10,19 @@ const int LED_PIN = 13;                     // LED pin - active-high
 
 const int numSensors = 15;
 int pinValue[numSensors];
-int portNumber[numSensors] = {0,1,2,3,4,5,6,7,8,9,10,11,12,15,16};  // input port number for each sensor
+int portNumber[numSensors] = {0,2,3,4,5,6,7,8,9,10,11,12,15,16,17};  // input port number for each sensor
 int portType[numSensors] = {INPUT_PULLUP,   // 0
-                            INPUT_PULLUP,   // 1
-                            INPUT_PULLUP,   // 2 - cabinet switch
-                            INPUT,          // 3 - Hall effect PCB switch
-                            INPUT,          // 4 - Keyes PCB reed switch
+                            INPUT_PULLUP,   // 1 - cabinet switch
+                            INPUT,          // 2 - Hall effect PCB switch
+                            INPUT_PULLUP,   // 3 - Keyes PCB reed switch
+                            INPUT_PULLUP,   // 4
                             INPUT_PULLUP,   // 5
-                            INPUT_PULLUP,   // 6
-                            INPUT_PULLUP,   // 7 - buttonA
-                            INPUT_PULLUP,   // 8 - buttonB
+                            INPUT_PULLUP,   // 6 - buttonA
+                            INPUT_PULLUP,   // 7 - buttonB
+                            INPUT_PULLUP,   // 8 - reed switch
                             INPUT_PULLUP,   // 9 - reed switch
                             INPUT_PULLUP,   // 10 - reed switch
-                            INPUT_PULLUP,   // 11 - reed switch
+                            INPUT_PULLUP,   // 11
                             INPUT_PULLUP,   // 12
                             INPUT_PULLUP,   // 13
                             INPUT_PULLUP};  // 14
@@ -30,7 +31,7 @@ boolean portInverted[numSensors] = {true,   // 0
                                     true,   // 1
                                     true,   // 2
                                     true,   // 3
-                                    false,  // 4
+                                    true,   // 4
                                     true,   // 5
                                     true,   // 6
                                     true,   // 7
